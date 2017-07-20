@@ -3,6 +3,10 @@
     include("../modelo-pessoa.php");
     include("../negocio-pessoa.php");
 
+    include("../../produtos/modelo-produto.php");
+    include("../../produtos/negocio-produto.php");
+
+
 
 $loIdPessoa         = NULL;
 $loNome             = NULL;
@@ -28,8 +32,12 @@ $loIdCidade         = 4742;
 $loIdPessoaVendedor = NULL;
 $loDataParaVisita   = NULL;
 $loNomePessoaContato  = NULL;
+$loQtdProduto      = NULL;
+$loIdProduto       = NULL;
+$loNomeProduto     = NULL;
 
 $loPessoa = new pessoaBO();
+$loProduto = new produtoBO();
 
 if(isset($_REQUEST["id_pessoa"])){
 
@@ -67,6 +75,9 @@ if(isset($_REQUEST["id_pessoa"])){
             $loIdPessoaVendedor  = $row->mbIdPessoaVendedor;
             $loDataParaVisita    = $row->mbDataParaVisita;
             $loNomePessoaContato = $row->mbNomePessoaContato;
+            $loIdProduto         = $row->mbIdProduto;
+            $loNomeProduto       = $row->mbNomeProduto;
+            $loQtdProduto       = $row->mbQtdProduto;
 
     }
 
@@ -258,6 +269,42 @@ if(isset($_REQUEST["id_pessoa"])){
                                                         <input type="email" id="email" class="form-control"  value="<?php echo $loEmail; ?>" > </div>
                                                 </div>
                                             </div>
+
+
+
+                                            <div class="form-group">
+                                                <label class="col-md-2 control-label">Produtos</label>
+                                                <div class="col-md-3">
+                                                    <select class="form-control" name="" id="select-produto" >
+                                                        <option value=""></option>
+                                                        <?php
+                                                                $loDadosP = NULL; 
+                                                                
+                                                                $loListaProdutos = $loProduto->ConsultaProduto($loDadosP);
+
+                                                                if(count($loListaProdutos) > 0){
+
+                                                                    foreach ($loListaProdutos as $row){
+                                                                        
+                                                                        $loSelected = NULL;
+                                                                        if($row->mbIdProduto == $loIdProduto){
+                                                                            $loSelected = "selected";
+                                                                        }
+                                                        ?>
+                                                                        <option <?php echo $loSelected; ?> value="<?php echo $row->mbIdProduto; ?>"><?php echo $row->mbNome; ?></option>
+                                                                        <?php
+                                                                    }
+                                                                }
+                                                                        
+                                                            ?>
+                                                    </select>                                                
+                                                </div>
+                                                <label class="col-md-1 control-label">Qtd Prod.</label>
+                                                <div class="col-md-1">
+                                                    <input type="text" class="form-control input-sm" name="qtd_produto" id="qtd_produto" value="<?php echo $loQtdProduto; ?>"  >
+                                                </div>
+                                            </div>   
+
 
                                             <div class="form-group">
                                                 <label class="col-md-2 control-label">Vendedor</label>

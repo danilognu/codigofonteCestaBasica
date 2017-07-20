@@ -33,7 +33,10 @@ Class pessoaVO{
     Public $mbIdPessoaVendedor;
     Public $mbNomeVendedor;
     Public $mbDataParaVisita;
-    Public $mbNomePessoaContato;       
+    Public $mbNomePessoaContato;  
+    Public $mbIdProduto;   
+    Public $mbNomeProduto;
+    Public $mbQtdProduto;  
 
 }
 

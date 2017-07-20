@@ -90,6 +90,8 @@ Cliente = {};
         var loIdPessoaVendedor = $("#id_pessoa_vendedor").val();
         var loDataParaVisita = $("#data_para_visita").val();
         var loNomePessoaContato = $("#nome_pessoa_contato").val();
+        var loIdProduto = $("#select-produto").val();
+        var loQtdProduto = $("#qtd_produto").val();
 
         var loDados = jQuery.parseJSON( 
             '{ "nome": "'+loNome+'"'
@@ -110,6 +112,8 @@ Cliente = {};
             + ' , "id_pessoa_vendedor": "'+loIdPessoaVendedor+'"'
             + ' , "data_para_visita": "'+loDataParaVisita+'"'
             + ' , "nome_pessoa_contato": "'+loNomePessoaContato+'"'
+            + ' , "id_produto": "'+loIdProduto+'"'
+            + ' , "qtd_produto": "'+loQtdProduto+'"'
             + ' , "status": "'+loStatus+'" }' 
          );
 

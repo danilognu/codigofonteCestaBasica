@@ -76,6 +76,9 @@ Class pessoaBOA{
                         ,pessoa_vendedor.nome as nome_vendedor
                         ,DATE_FORMAT(pessoa.data_para_visita, '%d/%m/%Y %H:%i') data_para_visita
                         ,pessoa.nome_contato
+                        ,produto.id_produto
+                        ,produto.nome as nome_produto
+                        ,pessoa.qtd_produto
                     FROM pessoa 
                     INNER JOIN tipo_pessoa ON tipo_pessoa.id_tipo_pessoa = pessoa.id_tipo_pessoa
                         LEFT JOIN grupo_acesso ON grupo_acesso.id_grupo_acesso = pessoa.id_grupo_acesso
@@ -84,6 +87,7 @@ Class pessoaBOA{
                         LEFT JOIN pessoa pessoa_cad ON pessoa_cad.id_pessoa =  pessoa.id_pessoa_cad
 			            LEFT JOIN pessoa pessoa_alt ON pessoa_alt.id_pessoa =  pessoa.id_pessoa_alt
                         LEFT JOIN pessoa pessoa_vendedor ON pessoa_vendedor.id_pessoa =  pessoa.id_pessoa_vendedor                                     
+                        LEFT JOIN produto ON produto.id_produto = pessoa.id_produto                    
                     WHERE 1 = 1 ".$loWhere;
         //echo $loSql;
         $query= $pdo->prepare($loSql);
@@ -124,6 +128,9 @@ Class pessoaBOA{
             $loPessoaItem->mbNomeVendedor      = $row["nome_vendedor"];
             $loPessoaItem->mbDataParaVisita    = $row["data_para_visita"];
             $loPessoaItem->mbNomePessoaContato = $row["nome_contato"];
+            $loPessoaItem->mbIdProduto         = $row["id_produto"];
+            $loPessoaItem->mbNomeProduto       = $row["nome_produto"];
+            $loPessoaItem->mbQtdProduto        = $row["qtd_produto"];
             $listaPessoa[$i] = $loPessoaItem;
             $i++;            
         
@@ -147,9 +154,6 @@ Class pessoaBOA{
             $loNumero       = $prPessoaVO->mbNumero;
             $loIdCidade     = $prPessoaVO->mbIdCidade;
             $loComplemento  = utf8_decode($prPessoaVO->mbComplemento);
-            $loTelefone1    = $prPessoaVO->mbTelefone1;
-            $loTelefone2    = $prPessoaVO->mbTelefone2;
-            $loTelefone3    = $prPessoaVO->mbTelefone3;
             $loEmail        = $prPessoaVO->mbEmail;
             $loStatus       = $prPessoaVO->mbStatus;
             $loIdTipoPessoa = $prPessoaVO->mbIdTipoPessoa;
@@ -157,6 +161,16 @@ Class pessoaBOA{
             $loIdPessoaVendedor = $prPessoaVO->mbIdPessoaVendedor;
             $loDataParaVisita   = $loComumBO->FormataDataYMDHMY($prPessoaVO->mbDataParaVisita);
             $loNomeContato = utf8_decode($prPessoaVO->mbNomePessoaContato);
+            $loIdProduto = $prPessoaVO->mbIdProduto;
+            $loQtdProduto = $prPessoaVO->mbQtdProduto;
+
+            $loTelefone1    = $prPessoaVO->mbTelefone1;
+            $loTelefone2    = $prPessoaVO->mbTelefone2;
+            $loTelefone3    = $prPessoaVO->mbTelefone3;
+
+            if($loTelefone1 == "16"){ $loTelefone1 = NULL; }
+            if($loTelefone2 == "16"){ $loTelefone2 = NULL; }
+            if($loTelefone3 == "16"){ $loTelefone3 = NULL; }
 
             $loLogin = NULL;
             if(isset($prPessoaVO->mbLogin)){
@@ -190,9 +204,11 @@ Class pessoaBOA{
                              ,id_pessoa_vendedor
                              ,data_para_visita
                              ,nome_contato
+                             ,id_produto
+                             ,qtd_produto
                              ,dt_cad                                                       
                         ) VALUES 
-                            (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,NOW())
+                            (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,NOW())
                         "; 
             $query = $pdo->prepare($loSql);
             $query->bindValue(1,  $loNome);
@@ -216,6 +232,8 @@ Class pessoaBOA{
             $query->bindValue(19, $loIdPessoaVendedor);
             $query->bindValue(20, $loDataParaVisita);
             $query->bindValue(21, $loNomeContato);
+            $query->bindValue(22, $loIdProduto);
+            $query->bindValue(23, $loQtdProduto);
             $query->execute();  
 
             $loSqlMax = "SELECT MAX(id_pessoa) id_pessoa_max FROM pessoa";
@@ -257,6 +275,12 @@ Class pessoaBOA{
             $loIdPessoaVendedor = $prPessoaVO->mbIdPessoaVendedor;       
             $loDataParaVisita   = $loComumBO->FormataDataYMDHMY($prPessoaVO->mbDataParaVisita); 
             $loNomeContato = utf8_decode($prPessoaVO->mbNomePessoaContato); 
+            $loIdProduto = $prPessoaVO->mbIdProduto;
+            $loQtdProduto = $prPessoaVO->mbQtdProduto;
+
+            if($loTelefone1 == "16"){ $loTelefone1 = NULL; }
+            if($loTelefone2 == "16"){ $loTelefone2 = NULL; }
+            if($loTelefone3 == "16"){ $loTelefone3 = NULL; }            
 
             $loParamentros = "";
             if($loIdTipoPessoa == 1){
@@ -291,6 +315,8 @@ Class pessoaBOA{
                              ,id_pessoa_vendedor = ?
                              ,data_para_visita = ?
                              ,nome_contato = ?
+                             ,id_produto = ?
+                             ,qtd_produto = ?
                              ,dt_alt = NOW()
                              ,id_pessoa_alt = NOW()
                              ".$loParamentros."                             
@@ -316,6 +342,8 @@ Class pessoaBOA{
             $query->bindValue(16, $loIdPessoaVendedor);
             $query->bindValue(17, $loDataParaVisita);
             $query->bindValue(18, $loNomeContato);
+            $query->bindValue(19, $loIdProduto);
+            $query->bindValue(20, $loQtdProduto);
             $query->execute();  
 
             return true;                              

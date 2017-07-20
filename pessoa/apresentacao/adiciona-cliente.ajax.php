@@ -26,6 +26,8 @@ if(isset($mbDados["id_grupo_acesso"])){ $loPessoaVO->mbIdGrupoAcesso    = $mbDad
 if(isset($mbDados["id_pessoa_vendedor"])){ $loPessoaVO->mbIdPessoaVendedor = $mbDados["id_pessoa_vendedor"];}
 if(isset($mbDados["data_para_visita"])){ $loPessoaVO->mbDataParaVisita = $mbDados["data_para_visita"];}
 if(isset($mbDados["nome_pessoa_contato"])){ $loPessoaVO->mbNomePessoaContato = $mbDados["nome_pessoa_contato"];}
+if(isset($mbDados["id_produto"])){ $loPessoaVO->mbIdProduto = $mbDados["id_produto"];}
+if(isset($mbDados["qtd_produto"])){ $loPessoaVO->mbQtdProduto = $mbDados["qtd_produto"];}
 
 
 
