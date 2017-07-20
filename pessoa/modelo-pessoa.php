@@ -33,7 +33,7 @@ Class pessoaVO{
     Public $mbIdPessoaVendedor;
     Public $mbNomeVendedor;
     Public $mbDataParaVisita;
-       
+    Public $mbNomePessoaContato;       
 
 }
 
