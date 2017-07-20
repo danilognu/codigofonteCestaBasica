@@ -89,6 +89,7 @@ Cliente = {};
         var loIdGrupoAcesso = "";
         var loIdPessoaVendedor = $("#id_pessoa_vendedor").val();
         var loDataParaVisita = $("#data_para_visita").val();
+        var loNomePessoaContato = $("#nome_pessoa_contato").val();
 
         var loDados = jQuery.parseJSON( 
             '{ "nome": "'+loNome+'"'
@@ -108,6 +109,7 @@ Cliente = {};
             + ' , "id_grupo_acesso": "'+loIdGrupoAcesso+'"'
             + ' , "id_pessoa_vendedor": "'+loIdPessoaVendedor+'"'
             + ' , "data_para_visita": "'+loDataParaVisita+'"'
+            + ' , "nome_pessoa_contato": "'+loNomePessoaContato+'"'
             + ' , "status": "'+loStatus+'" }' 
          );
 

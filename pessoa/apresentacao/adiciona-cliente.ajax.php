@@ -25,6 +25,8 @@ if(isset($mbDados["id_tipo_pessoa"])){  $loPessoaVO->mbIdTipoPessoa     = $mbDad
 if(isset($mbDados["id_grupo_acesso"])){ $loPessoaVO->mbIdGrupoAcesso    = $mbDados["id_grupo_acesso"];}
 if(isset($mbDados["id_pessoa_vendedor"])){ $loPessoaVO->mbIdPessoaVendedor = $mbDados["id_pessoa_vendedor"];}
 if(isset($mbDados["data_para_visita"])){ $loPessoaVO->mbDataParaVisita = $mbDados["data_para_visita"];}
+if(isset($mbDados["nome_pessoa_contato"])){ $loPessoaVO->mbNomePessoaContato = $mbDados["nome_pessoa_contato"];}
+
 
 
 $loPessoa = new pessoaBO();

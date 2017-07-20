@@ -14,7 +14,9 @@ if(count($loRetorno) > 0 ){
             <td style='cursor:pointer;' > <?php echo $row->mbNome; ?> </td>
             <td style='cursor:pointer; width: 30%' > 
                 <?php 
-                 echo $loComumBO ->MascaraTelefone($row->mbTelefone1); 
+                 if($row->mbTelefone1 != ""){
+                    echo $loComumBO ->MascaraTelefone($row->mbTelefone1); 
+                 }
                  if($row->mbTelefone2 != ""){
                     echo "&nbsp;&nbsp; / &nbsp;&nbsp; ".$loComumBO ->MascaraTelefone($row->mbTelefone2); 
                  }

@@ -2,7 +2,7 @@
 
 Class produtoBOA{
 
-    public function ConsultaProduto($mdDados){
+    public function ConsultaProduto($mbDados){
 
         $loConexao = new Conexao();
         $pdo = $loConexao->IniciaConexao();
@@ -14,6 +14,7 @@ Class produtoBOA{
         }else{
             $loWhere .= " AND produto.ativo = 1 ";
         }
+
 
         if( isset($mbDados["id_produto"]) && !empty($mbDados["id_produto"]) ){
             $loWhere .= " AND produto.id_produto = ".$mbDados["id_produto"];
@@ -34,6 +35,7 @@ Class produtoBOA{
                     LEFT JOIN pessoa pessoa_cad ON pessoa_cad.id_pessoa = produto.id_pessoa_cad
                     LEFT JOIN pessoa pessoa_alt ON pessoa_alt.id_pessoa = produto.id_pessoa_alt
                     WHERE 1=1 ".$loWhere;
+        //echo $loSql;
          $query= $pdo->prepare($loSql);
          $query->execute();
 
@@ -62,8 +64,8 @@ Class produtoBOA{
             $loConexao = new Conexao();
             $pdo = $loConexao->IniciaConexao();
 
-            $loNome = $mbDados["nome"];
-            $loDescricao = $mbDados["descricao"];
+            $loNome = utf8_decode($mbDados["nome"]);
+            $loDescricao = utf8_decode($mbDados["descricao"]);
             $loStatus = $mbDados["status"];
 
 
@@ -91,8 +93,8 @@ Class produtoBOA{
             $loConexao = new Conexao();
             $pdo = $loConexao->IniciaConexao();
 
-            $loNome = $mbDados["nome"];
-            $loDescricao = $mbDados["descricao"];
+            $loNome = utf8_decode($mbDados["nome"]);
+            $loDescricao = utf8_decode($mbDados["descricao"]);
             $loStatus = $mbDados["status"];
             $loIdProduto = $mbDados["id_produto"];
 

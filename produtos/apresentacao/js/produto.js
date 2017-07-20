@@ -8,6 +8,10 @@ Produto = {};
     // Objeto de acesso privado
     var priv = {};
 
+    pub.AbrirProduto_onClick = function(codigo){
+        priv.buttonAbrirProduto_onClick(codigo);
+    };
+
     jQuery(function ($) {
         var optionsPadrao = {
             autoOpen: false
@@ -17,7 +21,6 @@ Produto = {};
         //Consulta 
         $("#btn-pesquisa").click(priv.buttonPesquisar_onClick);
         $("#btn-pesquisa-adiciona").click(priv.buttonPesquisarAdiciona_onClick);
-        $(".abrir-produto").click(priv.buttonAbrirProduto_onClick);
 
         //Adiciona
         $("#btn-adicionar").click(priv.buttonAdicionar_onClick);
@@ -25,9 +28,9 @@ Produto = {};
 
     });
 
-    priv.buttonAbrirProduto_onClick = function(){
+    priv.buttonAbrirProduto_onClick = function(codigo){
         
-        var id_produto = $(this).attr("id");
+        var id_produto = codigo;
          window.location.href = "adicionar-produto.php?id_produto=" + id_produto;
 
     };

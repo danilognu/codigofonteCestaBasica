@@ -19,7 +19,7 @@ if(count($loRetorno) > 0 ){
         
     ?>
 
-    <tr class="odd gradeX abrir-produto" id="<?php echo $row->mbIdProduto; ?>" >
+    <tr class="odd gradeX abrir-produto" id="<?php echo $row->mbIdProduto; ?>" onclick="Produto.AbrirProduto_onClick(<?php echo $row->mbIdProduto; ?>);" >
             <td style='cursor:pointer; width: 10%' > <?php echo $row->mbIdProduto; ?> </td>
             <td style='cursor:pointer; width: 20%' > <?php echo $row->mbNome; ?> </td>
             <td style='cursor:pointer;' > <?php echo $row->mbDescricao; ?> </td>

@@ -14,8 +14,9 @@ var FormInputMask = function () {
             autoUnmask: true
         });     
 
-         $(".mask_telefone").inputmask("(99) 9999-9999", {
+         $(".mask_telefone").inputmask("(99) 999999999", {
             autoUnmask: true
+            ,placeholder: ""
         });     
 
         $(".mask_celular").inputmask("(99) 99999-9999", {

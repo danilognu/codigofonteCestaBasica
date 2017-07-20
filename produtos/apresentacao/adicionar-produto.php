@@ -17,7 +17,7 @@ if(isset($_REQUEST["id_produto"])){
 
     $loIdProduto = $_REQUEST["id_produto"];
     $loAcao = "U";
-    $loDados = array("id_produto" => $loIdPessoa);
+    $loDados = array("id_produto" => $loIdProduto);
 
     $loProduto = new produtoBO();
     $loListaProduto =  $loProduto->ConsultaProduto($loDados);

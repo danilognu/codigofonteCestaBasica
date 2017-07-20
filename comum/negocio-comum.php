@@ -38,7 +38,7 @@ Class comumBO{
     }
 
     public function RemoverMascaraTelefone($mbTelefone){
-        $loRemovStr = array("(",")","-"," ");
+        $loRemovStr = array("(",")","-"," ","_");
         $loTelefone = str_replace($loRemovStr, "", $mbTelefone);
         return $loTelefone;
     }

@@ -15,18 +15,19 @@ $loBairro           = NULL;
 $loNumero           = NULL;
 $loCep              = NULL;
 $loComplemento      = NULL;
-$loTelefone1        = NULL;
-$loTelefone2        = NULL;
-$loTelefone3        = NULL;
+$loTelefone1        = "(16)";
+$loTelefone2        = "(16)";
+$loTelefone3        = "(16)";
 $loIdPessoaCad      = NULL;
 $loDtCad            = NULL;
 $loDtAlt            = NULL;
 $loStatus           = 1;
 $loCnpj             = NULL;
-$loIdEstado         = NULL;
-$loIdCidade         = NULL;
+$loIdEstado         = 26;
+$loIdCidade         = 4742;
 $loIdPessoaVendedor = NULL;
 $loDataParaVisita   = NULL;
+$loNomePessoaContato  = NULL;
 
 $loPessoa = new pessoaBO();
 
@@ -42,29 +43,30 @@ if(isset($_REQUEST["id_pessoa"])){
 
     foreach ($loListaPessoa as $row) {
 
-            $loIdPessoa         = $row->mbIdPessoa;
-            $loNome             = $row->mbNome;
-            $loLogin            = $row->mbLogin;
-            $loEmail            = $row->mbEmail;
-            $loTipoPessoa       = $row->mbIdTipoPessoa;
-            $loNomeTipoPessoa   = $row->mbNomeTipoPessoa;
-            $loEndereco         = $row->mbEndereco;
-            $loBairro           = $row->mbBairro;
-            $loNumero           = $row->mbNumero;
-            $loCep              = $row->mbCep;
-            $loComplemento      = $row->mbComplemento;
-            $loTelefone1        = $row->mbTelefone1;
-            $loTelefone2        = $row->mbTelefone2;
-            $loTelefone3        = $row->mbTelefone3;
-            $loIdPessoaCad      = $row->mbIdPessoaCad;
-            $loDtCad            = $row->mbDtCad;
-            $loDtAlt            = $row->mbDtAlt;
-            $loStatus           = $row->mbStatus;
-            $loCnpj             = $row->mbCnpj;
-            $loIdEstado         = $row->mbIdEstado;
-            $loIdCidade         = $row->mbIdCidade;
-            $loIdPessoaVendedor = $row->mbIdPessoaVendedor;
-            $loDataParaVisita   = $row->mbDataParaVisita;
+            $loIdPessoa          = $row->mbIdPessoa;
+            $loNome              = $row->mbNome;
+            $loLogin             = $row->mbLogin;
+            $loEmail             = $row->mbEmail;
+            $loTipoPessoa        = $row->mbIdTipoPessoa;
+            $loNomeTipoPessoa    = $row->mbNomeTipoPessoa;
+            $loEndereco          = $row->mbEndereco;
+            $loBairro            = $row->mbBairro;
+            $loNumero            = $row->mbNumero;
+            $loCep               = $row->mbCep;
+            $loComplemento       = $row->mbComplemento;
+            $loTelefone1         = $row->mbTelefone1;
+            $loTelefone2         = $row->mbTelefone2;
+            $loTelefone3         = $row->mbTelefone3;
+            $loIdPessoaCad       = $row->mbIdPessoaCad;
+            $loDtCad             = $row->mbDtCad;
+            $loDtAlt             = $row->mbDtAlt;
+            $loStatus            = $row->mbStatus;
+            $loCnpj              = $row->mbCnpj;
+            $loIdEstado          = $row->mbIdEstado;
+            $loIdCidade          = $row->mbIdCidade;
+            $loIdPessoaVendedor  = $row->mbIdPessoaVendedor;
+            $loDataParaVisita    = $row->mbDataParaVisita;
+            $loNomePessoaContato = $row->mbNomePessoaContato;
 
     }
 
@@ -183,7 +185,7 @@ if(isset($_REQUEST["id_pessoa"])){
                                                             
                                                             $loSelected = "";
                                                             if($row->mbIdEstado == $loIdEstado){
-                                                                $loSelected = "selected";
+                                                                    $loSelected = "selected";
                                                             }
 
                                                             echo "<option value=".$row->mbIdEstado." ".$loSelected." >".$row->mbUF."</option>" ;      
@@ -220,7 +222,7 @@ if(isset($_REQUEST["id_pessoa"])){
                                                   </div>
                                                   <label class="col-md-1 control-label">Telefone2</label>
                                                   <div class="col-md-2">
-                                                    <input type="text" id="telefone2" class="form-control mask_celular"  value="<?php echo $loTelefone2; ?>"  >
+                                                    <input type="text" id="telefone2" class="form-control mask_telefone"  value="<?php echo $loTelefone2; ?>"  >
                                                   </div>
                                             </div>
 
@@ -237,7 +239,14 @@ if(isset($_REQUEST["id_pessoa"])){
                                                 <div class="col-md-2">
                                                     <input type="text" id="data_para_visita" class="form-control mask_date_hora" value="<?php echo $loDataParaVisita; ?>"   >
                                                   </div>
-                                            </div>                                               
+                                            </div>    
+                                            <div class="form-group">
+                                                <label class="col-md-2 control-label">Pessoa de Contato</label>
+                                                <div class="col-md-5">
+                                                    <input type="text" id="nome_pessoa_contato" class="form-control " value="<?php echo $loNomePessoaContato; ?>"   >
+                                                  </div>                                                  
+
+                                            </div>                                           
 
                                        <div class="form-group">
                                                 <label class="col-md-2 control-label">E-mail</label>

@@ -75,6 +75,7 @@ Class pessoaBOA{
                         ,pessoa_vendedor.id_pessoa as id_pessoa_vendedor
                         ,pessoa_vendedor.nome as nome_vendedor
                         ,DATE_FORMAT(pessoa.data_para_visita, '%d/%m/%Y %H:%i') data_para_visita
+                        ,pessoa.nome_contato
                     FROM pessoa 
                     INNER JOIN tipo_pessoa ON tipo_pessoa.id_tipo_pessoa = pessoa.id_tipo_pessoa
                         LEFT JOIN grupo_acesso ON grupo_acesso.id_grupo_acesso = pessoa.id_grupo_acesso
@@ -93,35 +94,36 @@ Class pessoaBOA{
         foreach ($query as $row) {
 
             $loPessoaItem = new pessoaVO();
-            $loPessoaItem->mbIdPessoa		  = $row["id_pessoa"];
-            $loPessoaItem->mbNome			  = $row["nome_pessoa"];
-            $loPessoaItem->mbLogin			  = $row["login"];
-            $loPessoaItem->mbEmail			  = $row["email"];
-            $loPessoaItem->mbIdTipoPessoa	  = $row["id_tipo_pessoa"];
-            $loPessoaItem->mbNomeTipoPessoa   = $row["nome_tipo_pessoa"];
-            $loPessoaItem->mbEndereco		  = $row["endereco"];
-            $loPessoaItem->mbBairro		      = $row["bairro"];
-            $loPessoaItem->mbNumero		      = $row["numero"];
-            $loPessoaItem->mbCep			  = $row["cep"];
-            $loPessoaItem->mbComplemento	  = $row["complemento"];
-            $loPessoaItem->mbTelefone1		  = $row["telefone1"];
-            $loPessoaItem->mbTelefone2		  = $row["telefone2"];
-            $loPessoaItem->mbTelefone3		  = $row["telefone3"];
-            $loPessoaItem->mbIdPessoaCad	  = $row["id_pessoa_cad"];
-            $loPessoaItem->mbDtCad			  = $row["dt_cad"];
-            $loPessoaItem->mbDtAlt			  = $row["dt_alt"];
-            $loPessoaItem->mbStatus			  = $row["ativo"];
-            $loPessoaItem->mbCnpj			  = $row["cnpj"];
-            $loPessoaItem->mbIdGrupoAcesso    = $row["id_grupo_acesso"];
-            $loPessoaItem->mbIdCidade         = $row["id_cidade"];
-            $loPessoaItem->mbNomeCidade       = $row["nome_cidade"];
-            $loPessoaItem->mbEstadoCidade     = $row["nome_estado"];
-            $loPessoaItem->mbIdEstado         = $row["id_estado"];
-            $loPessoaItem->mbNomePessoaCad    = $row["nome_pessoa_cad"];
-            $loPessoaItem->mbNomePessoaAlt    = $row["nome_pessoa_alt"];
-            $loPessoaItem->mbIdPessoaVendedor = $row["id_pessoa_vendedor"];
-            $loPessoaItem->mbNomeVendedor     = $row["nome_vendedor"];
-            $loPessoaItem->mbDataParaVisita   = $row["data_para_visita"];
+            $loPessoaItem->mbIdPessoa		   = $row["id_pessoa"];
+            $loPessoaItem->mbNome			   = $row["nome_pessoa"];
+            $loPessoaItem->mbLogin			   = $row["login"];
+            $loPessoaItem->mbEmail			   = $row["email"];
+            $loPessoaItem->mbIdTipoPessoa	   = $row["id_tipo_pessoa"];
+            $loPessoaItem->mbNomeTipoPessoa    = $row["nome_tipo_pessoa"];
+            $loPessoaItem->mbEndereco		   = $row["endereco"];
+            $loPessoaItem->mbBairro		       = $row["bairro"];
+            $loPessoaItem->mbNumero		       = $row["numero"];
+            $loPessoaItem->mbCep			   = $row["cep"];
+            $loPessoaItem->mbComplemento	   = $row["complemento"];
+            $loPessoaItem->mbTelefone1		   = $row["telefone1"];
+            $loPessoaItem->mbTelefone2		   = $row["telefone2"];
+            $loPessoaItem->mbTelefone3		   = $row["telefone3"];
+            $loPessoaItem->mbIdPessoaCad	   = $row["id_pessoa_cad"];
+            $loPessoaItem->mbDtCad			   = $row["dt_cad"];
+            $loPessoaItem->mbDtAlt			   = $row["dt_alt"];
+            $loPessoaItem->mbStatus			   = $row["ativo"];
+            $loPessoaItem->mbCnpj			   = $row["cnpj"];
+            $loPessoaItem->mbIdGrupoAcesso     = $row["id_grupo_acesso"];
+            $loPessoaItem->mbIdCidade          = $row["id_cidade"];
+            $loPessoaItem->mbNomeCidade        = $row["nome_cidade"];
+            $loPessoaItem->mbEstadoCidade      = $row["nome_estado"];
+            $loPessoaItem->mbIdEstado          = $row["id_estado"];
+            $loPessoaItem->mbNomePessoaCad     = $row["nome_pessoa_cad"];
+            $loPessoaItem->mbNomePessoaAlt     = $row["nome_pessoa_alt"];
+            $loPessoaItem->mbIdPessoaVendedor  = $row["id_pessoa_vendedor"];
+            $loPessoaItem->mbNomeVendedor      = $row["nome_vendedor"];
+            $loPessoaItem->mbDataParaVisita    = $row["data_para_visita"];
+            $loPessoaItem->mbNomePessoaContato = $row["nome_contato"];
             $listaPessoa[$i] = $loPessoaItem;
             $i++;            
         
@@ -154,6 +156,7 @@ Class pessoaBOA{
             $loIdGrupoAcesso = $prPessoaVO->mbIdGrupoAcesso;
             $loIdPessoaVendedor = $prPessoaVO->mbIdPessoaVendedor;
             $loDataParaVisita   = $loComumBO->FormataDataYMDHMY($prPessoaVO->mbDataParaVisita);
+            $loNomeContato = utf8_decode($prPessoaVO->mbNomePessoaContato);
 
             $loLogin = NULL;
             if(isset($prPessoaVO->mbLogin)){
@@ -186,9 +189,10 @@ Class pessoaBOA{
                              ,ativo
                              ,id_pessoa_vendedor
                              ,data_para_visita
+                             ,nome_contato
                              ,dt_cad                                                       
                         ) VALUES 
-                            (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,NOW())
+                            (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,NOW())
                         "; 
             $query = $pdo->prepare($loSql);
             $query->bindValue(1,  $loNome);
@@ -211,6 +215,7 @@ Class pessoaBOA{
             $query->bindValue(18, $loStatus);
             $query->bindValue(19, $loIdPessoaVendedor);
             $query->bindValue(20, $loDataParaVisita);
+            $query->bindValue(21, $loNomeContato);
             $query->execute();  
 
             $loSqlMax = "SELECT MAX(id_pessoa) id_pessoa_max FROM pessoa";
@@ -250,7 +255,8 @@ Class pessoaBOA{
             $loIdTipoPessoa = $prPessoaVO->mbIdTipoPessoa;
             $loIdGrupoAcesso = $prPessoaVO->mbIdGrupoAcesso;   
             $loIdPessoaVendedor = $prPessoaVO->mbIdPessoaVendedor;       
-            $loDataParaVisita   = $loComumBO->FormataDataYMDHMY($prPessoaVO->mbDataParaVisita);  
+            $loDataParaVisita   = $loComumBO->FormataDataYMDHMY($prPessoaVO->mbDataParaVisita); 
+            $loNomeContato = utf8_decode($prPessoaVO->mbNomePessoaContato); 
 
             $loParamentros = "";
             if($loIdTipoPessoa == 1){
@@ -284,6 +290,7 @@ Class pessoaBOA{
                              ,id_pessoa_alt = ?
                              ,id_pessoa_vendedor = ?
                              ,data_para_visita = ?
+                             ,nome_contato = ?
                              ,dt_alt = NOW()
                              ,id_pessoa_alt = NOW()
                              ".$loParamentros."                             
@@ -308,6 +315,7 @@ Class pessoaBOA{
             $query->bindValue(15, $_SESSION["id_pessoa_usuario"]);
             $query->bindValue(16, $loIdPessoaVendedor);
             $query->bindValue(17, $loDataParaVisita);
+            $query->bindValue(18, $loNomeContato);
             $query->execute();  
 
             return true;                              
