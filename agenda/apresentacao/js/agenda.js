@@ -8,8 +8,12 @@ Agenda = {};
     // Objeto de acesso privado
     var priv = {};
 
+    pub.AbrirAgenda_onClick = function(id){
+        priv.buttonAbrirProduto_onClick(id);
+    };
+
     pub.inputPesquisaTelefoneData_onBlur = function(){
-        alert("entro");
+        //--
     };
 
     pub.ModalClienteCadastrado = function(prCodigoCliente){
@@ -53,7 +57,7 @@ Agenda = {};
         //Consulta 
         $("#btn-pesquisa").click(priv.buttonPesquisar_onClick);
         $("#btn-pesquisa-adiciona").click(priv.buttonPesquisarAdiciona_onClick);
-        $(".abrir-produto").click(priv.buttonAbrirProduto_onClick);
+        //$(".abrir-produto").click(priv.buttonAbrirProduto_onClick);
         $("#btn-exibir-toda-agenda").click(priv.buttonAbrirTodaAgenda_onClick);
         $("#btn-exibir-dia-agenda").click(priv.buttonAbrirDiaAgenda_onClick);
         $(".btn-agenda-visitada").click(priv.buttonAgendaVisitada_onClick);
@@ -347,9 +351,9 @@ Agenda = {};
         });
     };
 
-    priv.buttonAbrirProduto_onClick = function(){
+    priv.buttonAbrirProduto_onClick = function(id){
         
-        var id_agenda = $(this).attr("id");
+        var id_agenda = id;
          window.location.href = "adicionar-agenda.php?id_agenda=" + id_agenda;
 
     };

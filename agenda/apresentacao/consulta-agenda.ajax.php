@@ -9,7 +9,7 @@ if(count($loRetorno) > 0 ){
         
     ?>
 
-    <tr class="odd gradeX">
+    <tr class="odd gradeX" onClick="Agenda.AbrirAgenda_onClick(<?php echo $row->mbIdAgenda; ?>)" >
             <td style='width: 01%' > </td>
             <td class="abrir-produto" id="<?php echo $row->mbIdAgenda; ?>" style='cursor:pointer; width: 05%' > 
                 <?php echo $row->mbIdAgenda; ?> 
