@@ -95,7 +95,7 @@ Class agendaBOA{
                 LEFT JOIN produto ON produto.id_produto = agenda.id_produto
                 WHERE 1=1 ".$loWhere;
 
-
+       //echo $loSql;
         $query= $pdo->prepare($loSql);
         $query->execute();
 
@@ -294,6 +294,47 @@ Class agendaBOA{
         }
 
         return $loRetorno;
+    }
+
+    public function BuscaCidadeAgendadas(){
+
+        $loConexao = new Conexao();
+        $pdo = $loConexao->IniciaConexao();
+        $loComumBO = new comumBO();
+
+        $loWhere = "";
+        $loComum = $loComumBO->VerificaAcessosUsuario();
+        if($loComum->mbIndExibeAgenda){
+            $loWhere .= " AND agenda.id_pessoa_cad = ".$_SESSION["id_pessoa_usuario"];
+        }
+
+        $loSql = "SELECT 
+                    cidade.id_cidade
+                    ,cidade.nome 
+                FROM agenda 
+                INNER JOIN pessoa cliente ON cliente.id_pessoa = agenda.id_pessoa_cliente
+                INNER JOIN cidade ON cidade.id_cidade = cliente.id_cidade
+                WHERE 1=1 ".$loWhere."
+                GROUP BY 
+                    cidade.id_cidade
+                    ,cidade.nome ";
+
+        $query= $pdo->prepare($loSql);
+        $query->execute();
+
+        $i = 0;
+        $listaCidadeAgenda = array();
+        foreach ($query as $row) { 
+
+            $loItem = new agendaFiltroVO();
+            $loItem->mbIdCidade  = $row["id_cidade"];
+            $loItem->mbNomeCidade  = $row["nome"];
+            $listaCidadeAgenda[$i] = $loItem;
+            $i++;  
+
+        }
+        return $listaCidadeAgenda;                     
+
     }
 
 }

@@ -36,7 +36,9 @@ Class agendaFiltroVO{
     Public $mbStatus;
     Public $mbIdAgenda;
     Public $mbIdCidade;
+    public $mbNomeCidade;
     public $mbIndVisitado;
     public $mbConsulta;
     public $mbIndAtrazados;
+
 }

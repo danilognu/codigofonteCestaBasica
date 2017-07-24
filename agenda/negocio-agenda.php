@@ -77,6 +77,14 @@ Class agendaBO{
         return $loDados;        
     }
 
+    public function BuscaCidadeAgendadas(){
+
+        $loAgenda = new agendaBOA();
+        $loDados = $loAgenda->BuscaCidadeAgendadas();
+
+        return $loDados;        
+    }    
+
        
 }
 

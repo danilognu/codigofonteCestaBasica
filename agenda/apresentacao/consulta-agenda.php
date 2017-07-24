@@ -16,9 +16,11 @@ $loComumBO = new comumBO();
 if( isset($_REQUEST["agenTotal"]) ){
     $loTitulo = "TODA AGENDA";
     $loAgenTotal = true;
+    $loTextAjuda = "<h6>As consultas  realizadas nesta tela, ir&aacute; exibir todos os agendamentos cadastrados. </h6>";
 }else {
     $loTitulo = "AGENDA DO DIA";
     $loAgenTotal = false;
+    $loTextAjuda = "<h6>As consultas  realizadas nesta tela, s&oacute; ser&aacute; exibido os agendamentos do dia. </h6>";
 }
 
 
@@ -89,6 +91,7 @@ if( isset($_REQUEST["agenTotal"]) && $_REQUEST["agenTotal"] == "S" ){
                                     <div class="caption font-dark">
                                         <i class="fa fa-calendar"></i>
                                         <span class="caption-subject bold uppercase"> <?php echo $loTitulo; ?> </span>
+                                        <?php echo $loTextAjuda; ?>
                                     </div>
                                 </div>
 
@@ -149,12 +152,11 @@ if( isset($_REQUEST["agenTotal"]) && $_REQUEST["agenTotal"] == "S" ){
                                                     <select class="form-control select2me" name="fil-select-cidade" id="fil-select-cidade" style=" width: 100px;"  >
                                                         <option value=""></option>
                                                         <?php
-                                                                $loDados = array("id_tipo_pessoa" => 3);
-                                                                $loPessoa = $loPessoaBO->ConsultaPessoa($loDados);
+                                                                $loAgendaBO = $loAgenda->BuscaCidadeAgendadas($loDados);
 
-                                                                if(count($loPessoa) > 0){
+                                                                if(count($loAgendaBO) > 0){
 
-                                                                    foreach ($loPessoa as $row){
+                                                                    foreach ($loAgendaBO as $row){
                                                                         if($row->mbIdCidade == $loAgendaFiltroVO->mbIdCidade){
                                                                             $loSelectedCid = "selected";
                                                                         }else{
@@ -185,7 +187,7 @@ if( isset($_REQUEST["agenTotal"]) && $_REQUEST["agenTotal"] == "S" ){
                                                         <i class="fa fa-search"></i>
                                                     </button>
                                                     <input type="hidden" name="fil-consulta" id="fil-consulta" value="1" >
-                                                    <input type="hidden" name="agenTotal" id="agenTotal" value="<?php echo $loAgendaFiltroVO->mbExibicaoAgendaTotal; ?>" >
+                                                    <input type="hidden" name="agenTotal" id="agenTotal" value="S" >
                                                 </div>
 
                                             </div>
