@@ -190,13 +190,6 @@ if(isset($_REQUEST["id_agenda_ant"])){
                                             </div>    
                                             
                                             <div class="form-group">
-                                                <label class="col-md-2 control-label">Data Para Visita</label>
-                                                <div class="col-md-2">
-                                                    <input type="text" id="data-para-visita" class="form-control" disabled value="<?php echo $loDataParaVisita; ?>" >
-                                                  </div>
-                                            </div>                                            
-
-                                            <div class="form-group">
                                                 <label class="col-md-2 control-label">Observa&ccedil;&atilde;o</label>
                                                 <div class="col-md-6">
                                                     <textarea id="observacao" cols="60" rows="5" ><?php echo $loObservacao; ?></textarea>
@@ -273,6 +266,7 @@ if(isset($_REQUEST["id_agenda_ant"])){
                                                     <?php } ?>
                                                     <input type="hidden" id="acao" value="<?php echo $loAcao; ?>" /> 
                                                     <input type="hidden" id="id_agenda" value="<?php echo $loIdAgenda; ?>" />
+                                                    <input type="hidden" id="data-para-visita" class="form-control" />
                                                 </div>
                                             </div>
                                         </div>
