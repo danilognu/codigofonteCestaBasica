@@ -9,7 +9,7 @@
     include("../../pessoa/modelo-pessoa.php");
     include("../../pessoa/negocio-pessoa.php");
 
-
+//teste commit
 $loIdAgenda             = NULL;
 $loIdPessoaCliente      = NULL;
 $loNomeCliente          = NULL;
