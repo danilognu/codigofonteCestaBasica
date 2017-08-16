@@ -186,6 +186,12 @@ Class agendaBOA{
             $loQtdProduto           = $mbDados["qtd_produto"];
             $loProdutos             = 1;       
 
+            //Deixa todas as agendas passadas para o mesmo cliente visitado     
+            $loSqlUp = "UPDATE agenda SET ind_visitado = 1 WHERE id_pessoa_cliente = ?";
+            $queryUp = $pdo->prepare($loSqlUp);
+            $queryUp->bindValue(1,  $loIdPessoaCliente);
+            $queryUp->execute();
+
 
             $loSql = "INSERT INTO agenda 
                         (

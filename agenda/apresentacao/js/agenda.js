@@ -164,6 +164,8 @@ Agenda = {};
 
     priv.buttonAgendaVisitada_onClick = function(){
 
+
+        
         var id_agenda = $(this).attr("id");
         var loObj = this;
 
@@ -206,14 +208,14 @@ Agenda = {};
                                 label: "Imprimir",
                                 className: "red",
                                 callback: function() {
-                                    window.open('exportador-pdf-doc-agenda.php?id_agenda='+id_agenda,'_blank');
+                                    //window.open('exportador-pdf-doc-agenda.php?id_agenda='+id_agenda,'_blank');
                                 }
                             },
                             reagendar: {
                                 label: "Agendar Proxima Visita",
                                 className: "blue",
                                 callback: function() {
-                                    window.location.href = "adicionar-agenda.php?id_agenda_ant="+id_agenda;
+                                    //window.location.href = "adicionar-agenda.php?id_agenda_ant="+id_agenda;
                                 }
                             }                            
                         }

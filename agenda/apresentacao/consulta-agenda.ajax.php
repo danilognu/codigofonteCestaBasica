@@ -9,24 +9,24 @@ if(count($loRetorno) > 0 ){
         
     ?>
 
-    <tr class="odd gradeX" onClick="Agenda.AbrirAgenda_onClick(<?php echo $row->mbIdAgenda; ?>)" >
+    <tr class="odd gradeX"  >
             <td style='width: 01%' > </td>
-            <td class="abrir-produto" id="<?php echo $row->mbIdAgenda; ?>" style='cursor:pointer; width: 05%' > 
+            <td class="abrir-produto" id="<?php echo $row->mbIdAgenda; ?>" style='cursor:pointer; width: 05%' onClick="Agenda.AbrirAgenda_onClick(<?php echo $row->mbIdAgenda; ?>)" > 
                 <?php echo $row->mbIdAgenda; ?> 
             </td>
-            <td class="abrir-produto" id="<?php echo $row->mbIdAgenda; ?>" style='cursor:pointer; width: 15%' > 
+            <td class="abrir-produto" id="<?php echo $row->mbIdAgenda; ?>" style='cursor:pointer; width: 15%' onClick="Agenda.AbrirAgenda_onClick(<?php echo $row->mbIdAgenda; ?>)" > 
                 <?php echo $row->mbDataVisita; ?> 
             </td>
-            <td class="abrir-produto" id="<?php echo $row->mbIdAgenda; ?>" style='cursor:pointer; width: 20%' > 
+            <td class="abrir-produto" id="<?php echo $row->mbIdAgenda; ?>" style='cursor:pointer; width: 20%' onClick="Agenda.AbrirAgenda_onClick(<?php echo $row->mbIdAgenda; ?>)" > 
                 <?php echo $row->mbNomeCliente; ?> 
             </td>
-            <td class="abrir-produto" id="<?php echo $row->mbIdAgenda; ?>" style='cursor:pointer; width: 15%' > 
+            <td class="abrir-produto" id="<?php echo $row->mbIdAgenda; ?>" style='cursor:pointer; width: 15%' onClick="Agenda.AbrirAgenda_onClick(<?php echo $row->mbIdAgenda; ?>)" > 
                 <?php if(strlen($row->mbTelefone1Cliente) > 0){echo $loComumBO->MascaraTelefone($row->mbTelefone1Cliente);} ?> 
             </td>
-            <td class="abrir-produto" id="<?php echo $row->mbIdAgenda; ?>" style='cursor:pointer;' > 
+            <td class="abrir-produto" id="<?php echo $row->mbIdAgenda; ?>" style='cursor:pointer;' onClick="Agenda.AbrirAgenda_onClick(<?php echo $row->mbIdAgenda; ?>)" > 
                 <?php echo $row->mbNomeProdutos; ?> 
             </td>
-            <td class="abrir-produto" id="<?php echo $row->mbIdAgenda; ?>" style='cursor:pointer;' > 
+            <td class="abrir-produto" id="<?php echo $row->mbIdAgenda; ?>" style='cursor:pointer;' onClick="Agenda.AbrirAgenda_onClick(<?php echo $row->mbIdAgenda; ?>)" > 
                 <?php echo $row->mbNomePessoaCad; ?> 
             </td>            
             <td style='width: 05%' > 
