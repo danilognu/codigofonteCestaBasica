@@ -9,6 +9,7 @@ $loTelefoneFil = NULL;
 $loContaItensFil = 0;
 $loConsultaFil = NULL;
 $loStatusFil = NULL;
+$loCodigoCidade = NULL;
 
 $loComumBO = new comumBO();
 $loPessoa = new pessoaBO();
@@ -17,8 +18,16 @@ if(isset($_POST["fil-nome"])){    $loNomeFil = $_POST["fil-nome"];  }
 if(isset($_POST["fil-telefone"])){  $loTelefoneFil = $_POST["fil-telefone"];  }
 if(isset($_POST["fil-consulta"])){  $loConsultaFil = $_POST["fil-consulta"];  }
 if(isset($_POST["fil-status"])){  $loStatusFil = $_POST["fil-status"];  }
+if(isset($_POST["fil-select-cidade"])){ $loCodigoCidade = $_POST["fil-select-cidade"]; }
 
-$loDados = array("id_tipo_pessoa" => 3, "nome" => $loNomeFil, "telefone1" => $loTelefoneFil, "consulta_filtro" => $loConsultaFil, "ativo" => $loStatusFil);
+$loDados = array(
+                    "id_tipo_pessoa" => 3
+                    , "nome" => $loNomeFil
+                    , "telefone1" => $loTelefoneFil
+                    , "consulta_filtro" => $loConsultaFil
+                    , "ativo" => $loStatusFil
+                    , "id_cidade" => $loCodigoCidade
+            );
 ?>
 
 <!DOCTYPE html>
@@ -85,6 +94,31 @@ $loDados = array("id_tipo_pessoa" => 3, "nome" => $loNomeFil, "telefone1" => $lo
                                                 <option value="N" <?php if($loStatusFil == "N"){ echo "selected";} ?>>Desativado</option>      
                                             </select>
                                         </div>
+
+                                        <div class="col-md-2">Cidades
+                                                    <select class="form-control select2me" name="fil-select-cidade" id="fil-select-cidade" style=" width: 100px;"  >
+                                                        <option value=""></option>
+                                                        <?php
+                                                                $loListaCidades = $loPessoa->BuscaCidadeClientes();
+
+                                                                if(count($loListaCidades) > 0){
+
+                                                                    foreach ($loListaCidades as $row){
+                                                                        if($row->mbIdCidade == $loCodigoCidade){
+                                                                            $loSelectedCid = "selected";
+                                                                        }else{
+                                                                            $loSelectedCid = "";
+                                                                        }       
+                                                                        ?>
+                                                                        <option value="<?php echo $row->mbIdCidade; ?>" <?php echo $loSelectedCid; ?> >
+                                                                            <?php echo $row->mbNomeCidade; ?>
+                                                                        </option>
+                                                                        <?php
+                                                                    }
+                                                                }                                                                        
+                                                            ?>
+                                                </select>
+                                            </div>                                        
 
                                         <div class="col-md-3">
                                             <br/>

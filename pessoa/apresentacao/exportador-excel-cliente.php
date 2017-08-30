@@ -22,9 +22,16 @@ if(isset($_POST["fil-nome"])){    $loNomeFil = $_POST["fil-nome"];  }
 if(isset($_POST["fil-telefone"])){  $loTelefoneFil = $_POST["fil-telefone"];  }
 if(isset($_POST["fil-consulta"])){  $loConsultaFil = $_POST["fil-consulta"];  }
 if(isset($_POST["fil-status"])){  $loStatusFil = $_POST["fil-status"];  }
+if(isset($_POST["fil-select-cidade"])){ $loCodigoCidade = $_POST["fil-select-cidade"]; }
 
-
-$loDados = array("id_tipo_pessoa" => 3, "nome" => $loNomeFil, "telefone1" => $loTelefoneFil, "consulta_filtro" => $loConsultaFil, "ativo" => $loStatusFil);
+$loDados = array(
+    "id_tipo_pessoa" => 3
+    , "nome" => $loNomeFil
+    , "telefone1" => $loTelefoneFil
+    , "consulta_filtro" => $loConsultaFil
+    , "ativo" => $loStatusFil
+    , "id_cidade" => $loCodigoCidade
+);
 
 
 //Cabeçalho

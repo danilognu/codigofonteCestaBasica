@@ -81,6 +81,15 @@ Class pessoaBO{
 
     }
 
+    public function BuscaCidadeClientes(){
+
+        $loPessoa = new pessoaBOA();
+        $loDados = $loPessoa->BuscaCidadeClientes();
+
+        return $loDados;       
+
+    }
+
 }
 
 

@@ -43,7 +43,9 @@ Class pessoaBOA{
             $loWhere .= " AND pessoa.id_pessoa = ".$mbDados["id_pessoa"];
         }
 
-
+        if( isset($mbDados["id_cidade"]) && !empty($mbDados["id_cidade"]) ){
+            $loWhere .= " AND pessoa.id_cidade = ".$mbDados["id_cidade"];
+        }
 
         $loSql = "SELECT 
                         pessoa.id_pessoa
@@ -374,6 +376,38 @@ Class pessoaBOA{
 
     }
 
+    public function BuscaCidadeClientes(){
+
+        $loConexao = new Conexao();
+        $pdo = $loConexao->IniciaConexao();
+
+        $loSql = " SELECT 
+                        cidade.id_cidade
+                        ,cidade.nome
+                    FROM pessoa 
+                        INNER JOIN cidade ON cidade.id_cidade = pessoa.id_cidade
+                    WHERE pessoa.id_tipo_pessoa = 3
+                    GROUP BY 
+                    cidade.id_cidade
+                    ,cidade.nome";
+        $query= $pdo->prepare($loSql);
+        $query->execute();
+
+        $i = 0;
+        $listaCidade = array();
+        foreach ($query as $row) { 
+
+            $loItem = new pessoaVO();
+            $loItem->mbIdCidade  = $row["id_cidade"];
+            $loItem->mbNomeCidade  = $row["nome"];
+            $listaCidade[$i] = $loItem;
+            $i++;  
+
+        }
+        return $listaCidade;
+    }
+
 }
+
 
 ?>
