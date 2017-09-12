@@ -78,6 +78,7 @@ Agenda = {};
     });
 
     priv.inputPesquisaTelefoneData_onBlur = function(){
+
         id_pessoa = $(this).val();
 
         $.ajax({
@@ -93,9 +94,26 @@ Agenda = {};
                $("#telefone-pesquisa").val(retorno.telefone);
                
             }
-        });    
-
+        });  
+        
+        priv.BuscaUltimaObsAgenda(id_pessoa);
     };
+
+    priv.BuscaUltimaObsAgenda = function(id_pessoa){
+
+        $.ajax({
+            data: {
+                 id_pessoa: id_pessoa
+            }
+            , type: "POST"
+            , dataType: "json"
+            , url: "pesquisa-observacao-agendamento-json-ajax.php"
+            , success: function (retorno) {
+                $("#observacao").val(retorno.observacao);
+            }
+        });  
+
+    }
 
     priv.inputPesquisaClienteTelefone_onBlur = function(){
 
@@ -138,6 +156,7 @@ Agenda = {};
                     $('#select-cliente option[value='+retorno.codigoCliente+']').attr('selected','selected');
                     $("#select2-select-cliente-container").attr("title",retorno.nomeCliente);
                     $("#select2-select-cliente-container").text(retorno.nomeCliente);
+                    priv.BuscaUltimaObsAgenda(retorno.codigoCliente);
 
                 }
 
@@ -192,35 +211,35 @@ Agenda = {};
                     });
 
                 }else{
-
-                     $(loObj).parent().html("<span class='label label-success'> Visitado </span>");
-
+                     
+                     window.location.href = "adicionar-agenda.php?id_agenda_ant="+id_agenda;          
+                    //$(loObj).parent().html("<span class='label label-success'> Visitado </span>");             
                     //begin bootbox
-                    bootbox.dialog({
-                        message: retorno.messagem,
-                        title: "Aviso",
-                        buttons: {
-                            success: {
-                                label: "Ok",
-                                className: "dark"
-                            },
-                            danger: {
-                                label: "Imprimir",
-                                className: "red",
-                                callback: function() {
-                                    //window.open('exportador-pdf-doc-agenda.php?id_agenda='+id_agenda,'_blank');
-                                }
-                            },
-                            reagendar: {
-                                label: "Agendar Proxima Visita",
-                                className: "blue",
-                                callback: function() {
-                                    //window.location.href = "adicionar-agenda.php?id_agenda_ant="+id_agenda;
-                                }
-                            }                            
-                        }
-                    });
-                    //end bootbox
+                    /* bootbox.dialog({
+                            message: retorno.messagem,
+                            title: "Aviso",
+                            buttons: {
+                                success: {
+                                    label: "Ok",
+                                    className: "dark"
+                                },
+                                danger: {
+                                    label: "Imprimir",
+                                    className: "red",
+                                    callback: function() {
+                                        //window.open('exportador-pdf-doc-agenda.php?id_agenda='+id_agenda,'_blank');
+                                    }
+                                },
+                                reagendar: {
+                                    label: "Agendar Proxima Visita",
+                                    className: "blue",
+                                    callback: function() {
+                                        //window.location.href = "adicionar-agenda.php?id_agenda_ant="+id_agenda;
+                                    }
+                                }                            
+                            }
+                        });*/
+                        //end bootbox
                 }
 
             }
@@ -384,7 +403,6 @@ Agenda = {};
             '{ "data_visita": "'+loDataAgendada+'"'
             + ' , "id_pessoa_cliente": "'+loIdPessoaCliente+'"'
             + ' , "ind_visitado": "'+loVisitado+'"'
-            + ' , "observacao": "'+loObeservacao+'"'
             + ' , "id_agenda": "'+loIdAgenda+'"'
             + ' , "id_produto": "'+loIdProduto+'"'
             + ' , "qtd_produto": "'+loQtdProdutor+'"'
@@ -395,6 +413,7 @@ Agenda = {};
           $.ajax({
             data: {
                  dados: loDados
+                 ,observacao: loObeservacao
             }
             , type: "POST"
             , dataType: "json"

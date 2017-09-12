@@ -11,7 +11,7 @@ Class agendaBO{
         return $loDados;
     }
 
-    public function AdicionaAgenda($mbDados){
+    public function AdicionaAgenda($mbDados,$mbObs){
 
         $loErro = false;
         $loMessagem = NULL;
@@ -33,9 +33,9 @@ Class agendaBO{
            
             $loAgendaBOA = new agendaBOA();
             if($mbDados["id_agenda"] == ""){
-                $loRetorno = $loAgendaBOA->IncluirAgenda($mbDados);
+                $loRetorno = $loAgendaBOA->IncluirAgenda($mbDados,$mbObs);
             }else{
-                $loRetorno = $loAgendaBOA->AlterarAgenda($mbDados);
+                $loRetorno = $loAgendaBOA->AlterarAgenda($mbDados,$mbObs);
             }
 
             if(!$loRetorno["erro"]){
@@ -84,6 +84,14 @@ Class agendaBO{
 
         return $loDados;        
     }    
+
+    public function BuscaObsAnteriorAgenda($prAgendaFiltroVO){
+
+        $loAgenda = new agendaBOA();
+        $loDados = $loAgenda->BuscaObsAnteriorAgenda($prAgendaFiltroVO);
+
+        return $loDados;     
+    }
 
        
 }

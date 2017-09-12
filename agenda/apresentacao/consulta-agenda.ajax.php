@@ -37,10 +37,8 @@ if(count($loRetorno) > 0 ){
                         echo "<span class='label label-success'> Visitado </span>"; 
                     }else{ 
                         echo "<button type='button' id=".$row->mbIdAgenda." class='btn blue btn-agenda-visitada'>
-                                    <i class='fa fa-check'></i>
-                            </button>
-                            <!--button type='button' class='btn red'><i class='fa fa-close'></i></button-->
-                            ";
+                                    Reagendar Cliente
+                            </button>";
                     } 
                     ?>
 

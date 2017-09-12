@@ -168,7 +168,7 @@ Class agendaBOA{
 
     }
 
-    public function IncluirAgenda($mbDados){
+    public function IncluirAgenda($mbDados,$mbObs){
 
             $loConexao = new Conexao();
             $pdo = $loConexao->IniciaConexao();
@@ -182,7 +182,7 @@ Class agendaBOA{
             $loIndVisitado          = $mbDados["ind_visitado"];
             $loAtivo                = $mbDados["ativo"];
             $loIdProduto            = $mbDados["id_produto"];
-            $loObs                  = utf8_decode($mbDados["observacao"]);
+            $loObs                  = utf8_decode($mbObs);
             $loQtdProduto           = $mbDados["qtd_produto"];
             $loProdutos             = 1;       
 
@@ -220,7 +220,7 @@ Class agendaBOA{
             return true;
     }
 
-    public function AlterarAgenda($mbDados){
+    public function AlterarAgenda($mbDados,$mbObs){
 
             $loConexao = new Conexao();
             $pdo = $loConexao->IniciaConexao();
@@ -232,7 +232,7 @@ Class agendaBOA{
             $loIndVisitado          = $mbDados["ind_visitado"];
             $loAtivo                = $mbDados["ativo"];
             $loIdProduto            = $mbDados["id_produto"];
-            $loObs                  = utf8_decode($mbDados["observacao"]);
+            $loObs                  = utf8_decode($mbObs);
             $loQtdProduto           = $mbDados["qtd_produto"];
             $loProdutos             = 1;       
 
@@ -300,6 +300,33 @@ Class agendaBOA{
         }
 
         return $loRetorno;
+    }
+
+    //Recupera ultima observação digitada na agenda atual
+    public function BuscaObsAnteriorAgenda($prAgendaFiltroVO){
+
+        $loConexao = new Conexao();
+        $pdo = $loConexao->IniciaConexao();
+        $loComumBO = new comumBO();
+        
+        $loSql = "SELECT 
+                    id_agenda
+                    ,observacao 
+                  FROM agenda 
+                  WHERE id_pessoa_cliente = ".$prAgendaFiltroVO->mbIdCliente."  
+                  ORDER BY id_agenda DESC  LIMIT 1";
+
+        $query= $pdo->prepare($loSql);
+        $query->execute(); 
+
+        $loObservacao = NULL;
+        foreach ($query as $row) {
+            
+            $loObservacao = $row["observacao"];
+        }   
+        
+        return $loObservacao;
+
     }
 
     public function BuscaCidadeAgendadas(){

@@ -78,8 +78,14 @@ if(isset($_REQUEST["id_agenda_ant"])){
         $loIdPessoaCliente      = $row->mbIdPessoaCliente;
         $loNomeCliente          = $row->mbNomeCliente;
         $loIdProduto            = $row->mbIdProdutos;
+        $loTelefone1Cliente     = $row->mbTelefone1Cliente;
 
     }
+
+    $loUltimaObs = NULL;    
+    $loAgendaFiltroVO->mbIdCliente = $loIdPessoaCliente;
+    $loUltimaObs = $loAgenda->BuscaObsAnteriorAgenda($loAgendaFiltroVO);
+    $loObservacao = $loUltimaObs; 
 }
 
 ?>
@@ -232,13 +238,16 @@ if(isset($_REQUEST["id_agenda_ant"])){
  
 
                                             <div class="form-group">
-                                                <label class="col-md-2 control-label">Visitado</label>
+                                                <input type="hidden" name="visitado" id="visitado" value="0" >
+
+                                                <!--label class="col-md-2 control-label">Visitado</label>
                                                 <div class="col-md-2">
                                                     <select class="form-control" id="visitado">
-                                                        <option <?php if($loIndVisitado == 1 ){ echo "selected"; }?> value="1" >SIM</option>
-                                                        <option <?php if($loIndVisitado == 0  ){ echo "selected"; }?> value="0" >NAO</option>
+                                                        <option <?php //if($loIndVisitado == 1 ){ echo "selected"; }?> value="1" >SIM</option>
+                                                        <option <?php //if($loIndVisitado == 0  ){ echo "selected"; }?> value="0" >NAO</option>
                                                     </select>                                                    
-                                                </div>                                                
+                                                </div-->
+
                                            </div>
 
                                             <div class="form-group">

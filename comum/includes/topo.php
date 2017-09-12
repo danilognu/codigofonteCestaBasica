@@ -146,7 +146,7 @@
                             </a>
                             <ul class="dropdown-menu dropdown-menu-default">
                                 <li>
-                                    <a href="../../pessoa/apresentacao/adicionar-usuario.php.php?id_pessoa=<?php echo $_SESSION["id_pessoa_usuario"]; ?>">
+                                    <a href="../../pessoa/apresentacao/adicionar-usuario.php?id_pessoa=<?php echo $_SESSION["id_pessoa_usuario"]; ?>">
                                         <i class="icon-user"></i> Alterar </a>
                                 </li>
                                 <li class="divider"> </li>
