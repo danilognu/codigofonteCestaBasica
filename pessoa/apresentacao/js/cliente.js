@@ -49,8 +49,81 @@ Cliente = {};
         //Adiciona
         $("#btn-adicionar").click(priv.buttonAdicionar_onClick);
         $("#btn-cancelar").click(priv.buttonCancelar_onClick);
+        $("#nome").blur(priv.inputVerificaNomeExiste_onBlur);
+        $("#telefone1").blur(priv.inputVerificaTelefoneExiste_onBlur);
 
     });
+
+    priv.inputVerificaTelefoneExiste_onBlur = function(){
+        
+        var loTelefone1 = $("#telefone1").val();
+
+        if(loTelefone1 != "" && loTelefone1 != "16"){
+            $.ajax({
+                data: {
+                    telefone1Cliente: loTelefone1
+                }
+                , type: "POST"
+                , dataType: "json"
+                , url: "verifica-cliente-existe.ajax.php"
+                , success: function (retorno) {
+
+                    if(retorno.conta_pessoa > 0){
+
+                        bootbox.dialog({
+                            message: "Existe um cliente cadastrado com este Telefone 1!",
+                            title: "Aviso",
+                            buttons: {
+                            success: {
+                                label: "OK",
+                                className: "dark"
+                            }
+                            }
+                        });    
+
+                    }            
+
+                }
+            });    
+        }
+
+
+    };
+
+    priv.inputVerificaNomeExiste_onBlur = function(){
+        
+        var loNomeCliente = $("#nome").val();
+
+        if(loNomeCliente != ""){
+            $.ajax({
+                data: {
+                    nomeCliente: loNomeCliente
+                }
+                , type: "POST"
+                , dataType: "json"
+                , url: "verifica-cliente-existe.ajax.php"
+                , success: function (retorno) {
+
+                    if(retorno.conta_pessoa > 0){
+
+                        bootbox.dialog({
+                            message: "Existe um cliente cadastrado com este nome!",
+                            title: "Aviso",
+                            buttons: {
+                            success: {
+                                label: "OK",
+                                className: "dark"
+                            }
+                            }
+                        });    
+
+                    }            
+
+                }
+            });    
+        }
+
+    };
 
     priv.buttonExportadorExcel_onClick = function(){
 

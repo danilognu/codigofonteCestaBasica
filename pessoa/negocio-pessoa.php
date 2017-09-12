@@ -90,6 +90,15 @@ Class pessoaBO{
 
     }
 
+    public function VerificaPessoaExiste($prPessoaVO){
+
+        $loPessoa = new pessoaBOA();
+        $loDados = $loPessoa->VerificaPessoaExiste($prPessoaVO);
+
+        return $loDados; 
+
+    }
+
 }
 
 

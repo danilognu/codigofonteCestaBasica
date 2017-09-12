@@ -407,6 +407,41 @@ Class pessoaBOA{
         return $listaCidade;
     }
 
+    public function VerificaPessoaExiste($prPessoaVO){
+
+        $loConexao = new Conexao();
+        $pdo = $loConexao->IniciaConexao();
+
+        $loWhereNome = NULL;
+        if($prPessoaVO->mbNome != ""){
+            $loWhereNome = " AND nome = '".utf8_decode($prPessoaVO->mbNome)."'";
+        }
+
+        $loWhereTelefone = NULL;
+        if($prPessoaVO->mbTelefone1 != ""){
+            $loWhereTelefone = " AND telefone1 = '".$prPessoaVO->mbTelefone1."'";
+        }        
+
+        $loSql = "SELECT 
+                        COUNT(id_pessoa) conta_nome 
+                  FROM pessoa 
+                  WHERE 1=1 
+                  ".$loWhereNome."
+                  ".$loWhereTelefone."
+                  ";
+
+        $query= $pdo->prepare($loSql);
+        $query->execute();     
+        
+        $loContagem = 0;
+        foreach ($query as $row) {
+            $loContagem = $row["conta_nome"]; 
+        }
+
+        return $loContagem;
+
+    }
+
 }
 
 

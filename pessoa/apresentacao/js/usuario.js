@@ -22,7 +22,7 @@ Usuario = {};
         //Adiciona
         $("#btn-adicionar").click(priv.buttonAdicionar_onClick);
         $("#btn-cancelar").click(priv.buttonCancelar_onClick);
-        $("#login").blur(priv.inputVerificaLogin_onBlur);
+        //$("#login").blur(priv.inputVerificaLogin_onBlur);
 
     });
 
@@ -55,7 +55,6 @@ Usuario = {};
                             }
                         });
 
-                        $("#login").val("");
                     }
 
                 }
