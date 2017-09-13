@@ -370,6 +370,38 @@ Class agendaBOA{
 
     }
 
+    public function HistoricoObsAgendamentoCliente($prCodigoCliente){
+
+        $loConexao = new Conexao();
+        $pdo = $loConexao->IniciaConexao();
+
+        $loSql = "SELECT 
+                     id_agenda
+                     ,observacao
+                     ,DATE_FORMAT(dt_cad, '%d/%m/%Y %H:%i') dt_cad
+                FROM agenda 
+                WHERE id_pessoa_cliente = ".$prCodigoCliente." AND observacao <> '' 
+                ORDER BY id_agenda DESC LIMIT 10 ";     
+        $query= $pdo->prepare($loSql);
+        $query->execute();         
+        
+        $i = 0;
+        $listaHistObs = array();
+        foreach ($query as $row) {
+
+            $loItem = new agendaVO();
+            $loItem->mbIdAgenda  = $row["id_agenda"];
+            $loItem->mbObservacao  = $row["observacao"];
+            $loItem->mbDtCad  = $row["dt_cad"];
+            $listaHistObs[$i] = $loItem;
+            $i++;     
+
+        }
+
+        return $listaHistObs;
+
+    }
+
 }
 
 ?>

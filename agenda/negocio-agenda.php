@@ -93,6 +93,15 @@ Class agendaBO{
         return $loDados;     
     }
 
+    public function HistoricoObsAgendamentoCliente($prCodigoCliente){
+
+        $loAgenda = new agendaBOA();
+        $loDados = $loAgenda->HistoricoObsAgendamentoCliente($prCodigoCliente);
+
+        return $loDados;    
+
+    }
+
        
 }
 

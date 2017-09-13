@@ -194,11 +194,18 @@ if(isset($_REQUEST["id_agenda_ant"])){
                                                     <a href="#" id="adicionar-cliente-novo" class="btn btn-default"><i class="fa fa-plus"></i></a>
                                                 </div>                                                  
                                             </div>    
-                                            
+
+                                                                                       
                                             <div class="form-group">
                                                 <label class="col-md-2 control-label">Observa&ccedil;&atilde;o</label>
                                                 <div class="col-md-6">
                                                     <textarea id="observacao" cols="60" rows="5" ><?php echo $loObservacao; ?></textarea>
+                                                    <br />
+                                                    <div class="btn-group btn-group-xs btn-group-solid">
+                                                       <button type="button" class="btn blue"  data-toggle="modal" href="#basic">
+                                                           Historico observa&ccedil;&otilde;es das agendas antigas
+                                                        </button>
+                                                    </div>
                                                  </div> 
                                             </div>   
                       
@@ -289,6 +296,43 @@ if(isset($_REQUEST["id_agenda_ant"])){
 
             </div>
         </div>     
+
+
+
+        <div class="modal fade" id="basic" tabindex="-1" role="basic" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                        <h5 class="modal-title">Historico de observa&ccedil;&otilde;es ja cadastradas em outras agendamentos para este cliente</h5>
+                    </div>
+                    <div class="modal-body">
+                        <div id="blockui_sample_3_1_element">
+                             <?php 
+                                $loListaObsHistoAgenda =  $loAgenda->HistoricoObsAgendamentoCliente($loIdPessoaCliente);
+                                
+                                if(count($loListaObsHistoAgenda) > 0){
+                                    foreach ($loListaObsHistoAgenda as $row) {
+                                        echo "<p>". $row->mbObservacao."</p>"; 
+                                    }
+                                }else{
+                                    echo "<p>Sem historico cadastrado..</p>";
+                                }
+                            
+                            ?>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline sbold red" data-dismiss="modal">Fechar</button>
+                    </div>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
+
+
+
         <div id="dialog-message"></div>     
         <!-- END CONTAINER -->
         
