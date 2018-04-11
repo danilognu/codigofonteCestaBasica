@@ -165,6 +165,7 @@ Cliente = {};
         var loNomePessoaContato = $("#nome_pessoa_contato").val();
         var loIdProduto = $("#select-produto").val();
         var loQtdProduto = $("#qtd_produto").val();
+        var loObservacao = $("#observacao").val();
 
         var loDados = jQuery.parseJSON( 
             '{ "nome": "'+loNome+'"'
@@ -187,6 +188,7 @@ Cliente = {};
             + ' , "nome_pessoa_contato": "'+loNomePessoaContato+'"'
             + ' , "id_produto": "'+loIdProduto+'"'
             + ' , "qtd_produto": "'+loQtdProduto+'"'
+            + ' , "observacao": "'+loObservacao+'"'
             + ' , "status": "'+loStatus+'" }' 
          );
 

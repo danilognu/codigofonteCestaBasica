@@ -35,6 +35,7 @@ $loNomePessoaContato  = NULL;
 $loQtdProduto      = NULL;
 $loIdProduto       = NULL;
 $loNomeProduto     = NULL;
+$loObservacao      = NULL;
 
 $loPessoa = new pessoaBO();
 $loProduto = new produtoBO();
@@ -77,7 +78,8 @@ if(isset($_REQUEST["id_pessoa"])){
             $loNomePessoaContato = $row->mbNomePessoaContato;
             $loIdProduto         = $row->mbIdProduto;
             $loNomeProduto       = $row->mbNomeProduto;
-            $loQtdProduto       = $row->mbQtdProduto;
+            $loQtdProduto        = $row->mbQtdProduto;
+            $loObservacao        = $row->mbObservacao;
 
     }
 
@@ -340,7 +342,12 @@ if(isset($_REQUEST["id_pessoa"])){
                                                 
                                            </div>
 
-
+                                           <div class="form-group">
+                                                <label class="col-md-2 control-label">Observa&ccedil;&atilde;o</label>
+                                                <div class="col-md-6">
+                                                    <textarea id="observacao" cols="60" rows="5" ><?php echo $loObservacao; ?></textarea>
+                                                 </div> 
+                                            </div> 
 
                                             <div class="form-group">
                                                 <label class="col-md-2 control-label">Status</label>

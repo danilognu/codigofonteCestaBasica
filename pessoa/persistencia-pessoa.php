@@ -81,6 +81,7 @@ Class pessoaBOA{
                         ,produto.id_produto
                         ,produto.nome as nome_produto
                         ,pessoa.qtd_produto
+                        ,pessoa.observacao
                     FROM pessoa 
                     INNER JOIN tipo_pessoa ON tipo_pessoa.id_tipo_pessoa = pessoa.id_tipo_pessoa
                         LEFT JOIN grupo_acesso ON grupo_acesso.id_grupo_acesso = pessoa.id_grupo_acesso
@@ -133,6 +134,7 @@ Class pessoaBOA{
             $loPessoaItem->mbIdProduto         = $row["id_produto"];
             $loPessoaItem->mbNomeProduto       = $row["nome_produto"];
             $loPessoaItem->mbQtdProduto        = $row["qtd_produto"];
+            $loPessoaItem->mbObservacao        = $row["observacao"]; 
             $listaPessoa[$i] = $loPessoaItem;
             $i++;            
         
@@ -165,6 +167,7 @@ Class pessoaBOA{
             $loNomeContato = utf8_decode($prPessoaVO->mbNomePessoaContato);
             $loIdProduto = $prPessoaVO->mbIdProduto;
             $loQtdProduto = $prPessoaVO->mbQtdProduto;
+            $loObservacao = $prPessoaVO->mbObservacao;
 
             $loTelefone1    = $prPessoaVO->mbTelefone1;
             $loTelefone2    = $prPessoaVO->mbTelefone2;
@@ -208,9 +211,10 @@ Class pessoaBOA{
                              ,nome_contato
                              ,id_produto
                              ,qtd_produto
+                             ,observacao
                              ,dt_cad                                                       
                         ) VALUES 
-                            (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,NOW())
+                            (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,NOW())
                         "; 
             $query = $pdo->prepare($loSql);
             $query->bindValue(1,  $loNome);
@@ -236,6 +240,7 @@ Class pessoaBOA{
             $query->bindValue(21, $loNomeContato);
             $query->bindValue(22, $loIdProduto);
             $query->bindValue(23, $loQtdProduto);
+            $query->bindValue(24, $loObservacao);
             $query->execute();  
 
             $loSqlMax = "SELECT MAX(id_pessoa) id_pessoa_max FROM pessoa";
@@ -279,6 +284,8 @@ Class pessoaBOA{
             $loNomeContato = utf8_decode($prPessoaVO->mbNomePessoaContato); 
             $loIdProduto = $prPessoaVO->mbIdProduto;
             $loQtdProduto = $prPessoaVO->mbQtdProduto;
+            $loObservacao = $prPessoaVO->mbObservacao;
+
 
             if($loTelefone1 == "16"){ $loTelefone1 = NULL; }
             if($loTelefone2 == "16"){ $loTelefone2 = NULL; }
@@ -319,6 +326,7 @@ Class pessoaBOA{
                              ,nome_contato = ?
                              ,id_produto = ?
                              ,qtd_produto = ?
+                             ,observacao = ?
                              ,dt_alt = NOW()
                              ,id_pessoa_alt = NOW()
                              ".$loParamentros."                             
@@ -346,6 +354,7 @@ Class pessoaBOA{
             $query->bindValue(18, $loNomeContato);
             $query->bindValue(19, $loIdProduto);
             $query->bindValue(20, $loQtdProduto);
+            $query->bindValue(21, $loObservacao);
             $query->execute();  
 
             return true;                              

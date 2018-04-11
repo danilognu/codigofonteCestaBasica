@@ -37,6 +37,7 @@ Class pessoaVO{
     Public $mbIdProduto;   
     Public $mbNomeProduto;
     Public $mbQtdProduto;  
+    Public $mbObservacao;
 
 }
 

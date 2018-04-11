@@ -5,7 +5,6 @@ include("../negocio-pessoa.php");
 
 $mbDados = $_POST["dados"];
 
-
 $loPessoaVO = new pessoaVO();
 if(isset($mbDados["id_pessoa"])){       $loPessoaVO->mbIdPessoa         = $mbDados["id_pessoa"];}
 if(isset($mbDados["nome"])){            $loPessoaVO->mbNome             = $mbDados["nome"];}
@@ -22,6 +21,8 @@ if(isset($mbDados["email"])){           $loPessoaVO->mbEmail            = $mbDad
 if(isset($mbDados["status"])){          $loPessoaVO->mbStatus           = $mbDados["status"];}
 if(isset($mbDados["id_tipo_pessoa"])){  $loPessoaVO->mbIdTipoPessoa     = $mbDados["id_tipo_pessoa"];}
 if(isset($mbDados["id_grupo_acesso"])){ $loPessoaVO->mbIdGrupoAcesso    = $mbDados["id_grupo_acesso"];}
+
+
 
 if(isset($mbDados["login"])){ $loPessoaVO->mbLogin            = $mbDados["login"];}
 if(isset($mbDados["senha"])){ $loPessoaVO->mbSenha            = $mbDados["senha"];}

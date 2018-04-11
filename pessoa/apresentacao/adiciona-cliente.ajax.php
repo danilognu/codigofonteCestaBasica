@@ -28,6 +28,7 @@ if(isset($mbDados["data_para_visita"])){ $loPessoaVO->mbDataParaVisita = $mbDado
 if(isset($mbDados["nome_pessoa_contato"])){ $loPessoaVO->mbNomePessoaContato = $mbDados["nome_pessoa_contato"];}
 if(isset($mbDados["id_produto"])){ $loPessoaVO->mbIdProduto = $mbDados["id_produto"];}
 if(isset($mbDados["qtd_produto"])){ $loPessoaVO->mbQtdProduto = $mbDados["qtd_produto"];}
+if(isset($mbDados["observacao"])){      $loPessoaVO->mbObservacao       = $mbDados["observacao"];}
 
 
 

@@ -125,7 +125,7 @@ foreach ($loGrupo as $row){
                                                                
                                                                 //Aqui é definido as permissoes no meu que nao pai
                                                                 //Agenda - Anotações BEGIN 
-                                                                if($row->mbIdNome == 2 || $row->mbIdNome == 3){
+                                                                if($row->mbIdNome == 2 || $row->mbIdNome == 3 || $row->mbIdNome == 10){
 
                                                                     $loGrupoVO = new permissoesGrupoVO();
                                                                     $loGrupoVO->mbIdGrupoAcesso = $loIdGrupoAcesso;
